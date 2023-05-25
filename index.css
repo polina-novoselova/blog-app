@@ -16,7 +16,7 @@ body {
 
 .background-cover {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: space-between;
     height: 120px;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://balthazar.club/uploads/posts/2023-02/1675282642_balthazar-club-p-raznotsvetnie-tsveti-oboi-15.jpg);
@@ -24,15 +24,8 @@ body {
     background-size: cover;
 }
 
-.logo {
-    margin-top: 70px;
-    margin-left: 30px;
-    width: 100px;
-    height: 100px;
-}
-
 .blog-title {
-    padding-top: 30px;
+    margin-top: 30px;
     font-size: 25px;
     font-weight: 200;
     line-height: 50px;
@@ -40,21 +33,69 @@ body {
     text-align: center;
 }
 
-.add-post-btn {
-    margin: 130px 10px 0 0;
-    padding: 5px;
+.logo {
+    margin-top: -20px;
+    margin-left: 30px;
     width: 120px;
-    height: 30px;
+    height: 120px;
+}
+
+.add-post-btn,
+.for-large-screen {
+    align-self: flex-end;
+    margin: -45px 13px 0 0;
+    width: 150px;
     border: 1px solid #14508d;
     border-radius: 30px;
     background-color: #175da3;
-    font-size: 12px;
+    font-size: 14px;
+    line-height: 40px;
     transition: all 0.5s;
+}
+
+.for-small-screen {
+    display: none;
 }
 
 .add-post-btn:hover {
     border: 1px solid #175da3;
     background-color: #2770b9;
+}
+
+@media (max-width: 600px) {
+    .background-cover {
+        height: 100px;
+    }
+    
+    .blog-title {
+        margin-top: 20px;
+        font-size: 18px;
+        line-height: 60px;
+        letter-spacing: 0.5em;
+    }
+    
+    .logo {
+        margin-top: -20px;
+        margin-left: 20px;
+        width: 80px;
+        height: 80px;
+    }
+    
+    .add-post-btn,
+    .for-small-screen {
+        display: table;
+        position: fixed;
+        bottom: 20px;
+        right: 5px;
+        width: 50px;
+        font-size: 60px;
+        font-weight: 200;
+        line-height: 50px;
+    }
+
+    .for-large-screen {
+        display: none;
+    }
 }
 
 .posts-feed {
