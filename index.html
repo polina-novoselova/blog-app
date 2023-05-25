@@ -1,16 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/reset.css" />
+    <link rel="stylesheet" href="/index.css" />
 
     <title>Document</title>
-</head>
-<body>
-    
+  </head>
+  <body>
+    <header>
+      <section class="header-inner">
+        <div class="background-cover">
+          <img src="/logo.png" alt="" class="logo" />
+          <h1 class="blog-title">POLINITTER</h1>
+          <button class="add-post-btn">Add new post</button>
+        </div>
+      </section>
+    </header>
+    <main>
+      <section class="posts-feed">
+        <h2 class="posts-feed__title">NEWS FEED</h2>
+        <ul class="posts-list">
+          <li class="post-item">
+            <h3 class="post-title">Post title</h3>
+            <p class="post-text">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Dignissimos accusantium ipsa enim veritatis reiciendis. Id
+              molestias necessitatibus beatae sapiente laboriosam fugit
+              inventore eligendi, aperiam magnam sequi dolorum nulla officia!
+              Distinctio?
+            </p>
+            <p class="post-date">23 may 2023 | 23:12</p>
+          </li>
+          <li class="post-item">
+            <h3 class="post-title">Post title</h3>
+            <p class="post-text">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Dignissimos accusantium ipsa enim veritatis reiciendis. Id
+              molestias necessitatibus beatae sapiente laboriosam fugit
+              inventore eligendi, aperiam magnam sequi dolorum nulla officia!
+              Distinctio?
+            </p>
+            <p class="post-date">23 may 2023 | 23:12</p>
+          </li>
+        </ul>
+      </section>
+    </main>
     <script src="/index.js"></script>
-</body>
+  </body>
 </html>
