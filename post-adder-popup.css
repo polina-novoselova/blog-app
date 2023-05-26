@@ -1,0 +1,120 @@
+.add-post-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 0 10px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.3);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.js-popup-open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.add-post-popup-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 550px;
+  padding: 20px 20px;
+  background-color: #292634;
+  border: 1px solid #242424;
+  border-radius: 20px;
+}
+
+.close-btn-popup {
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-image: url(./add-post-close-btn.png);
+  background-position: center;
+  background-size: cover;
+  filter: invert(1);
+}
+
+.close-btn-popup:hover {
+  border: 1px solid transparent;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(000, 000, 000, 0.1);
+  background-color: rgba(000, 000, 000, 0.1);
+}
+
+.post-title-wrap {
+    position: relative;
+}
+
+.post-title {
+    margin-top: 15px;
+    padding: 10px 20px;
+  width: 100%;
+  height: 40px;
+  border-bottom: 1px solid #545454;
+  font-size: 16px;
+}
+
+.post-title::placeholder {
+    font-size: 16px;
+}
+
+.post-title-counter {
+    position: absolute;
+    right: 10px;
+    bottom: 6px;
+
+}
+
+.post-title-current,
+.post-title-total,
+.post-dscrpt-current,
+.post-dscrpt-total {
+    font-size: 12px;
+}
+
+.post-dscrpt-wrap {
+    position: relative;
+}
+
+.post-dscrpt {
+    margin-top: 15px;
+    padding: 0 20px;
+  width: 100%;
+  height: 150px;
+  border-bottom: 1px solid #545454;
+  resize: none;
+  font-size: 18px;
+}
+
+.post-dscrpt::placeholder {
+    font-size: 16px;
+}
+
+.post-dscrpt-counter {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+.publish-post-btn {
+  align-self: flex-end;
+  margin-top: 20px;
+  width: 150px;
+  border: 1px solid #14508d;
+  border-radius: 40px;
+  background-color: #175da3;
+  font-size: 14px;
+  line-height: 40px;
+  transition: all 0.5s;
+}
+
+.publish-post-btn:hover {
+    border: 1px solid #175da3;
+    background-color: #2770b9;
+}

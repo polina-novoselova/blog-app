@@ -68,6 +68,29 @@
         </ul>
       </section>
     </main>
+    <div class="add-post-popup js-popup-open">
+      <div class="add-post-popup-content">
+        <button class="close-btn-popup"></button>
+        <div class="post-title-wrap">
+            <input type="text" class="post-title" placeholder="Add a title" />
+            <div class="post-title-counter">
+                <span class="post-title-current">0</span>
+                <span>/</span>
+                <span class="post-title-total">80</span>
+            </div>
+        </div>
+        <div class="post-dscrpt-wrap">
+            <textarea id="" class="post-dscrpt" cols="25" rows="10" maxlength="300" placeholder="Your text"></textarea>
+            <div class="post-dscrpt-counter">
+                <span class="post-dscrpt-current">0</span>
+                <span>/</span>
+                <span class="post-dscrpt-total">360</span>
+            </div>
+        </div>
+        <button class="publish-post-btn">Publish</button>
+      </div>
+    </div>
+
     <script src="/index.js"></script>
   </body>
 </html>
