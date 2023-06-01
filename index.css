@@ -7,10 +7,19 @@ body {
     color: #ffffff;
 }
 
+.body_fixed {
+    overflow: hidden;
+}
+
+main {
+    min-height: 100%;
+}
+
+main, 
 .header-inner {
+    margin: 0 auto;
     max-width: 600px;
     width: 100%;
-    margin: auto;
     background-color: #141414;
     border-left: 1px solid #343434;
     border-right: 1px solid #343434;
@@ -101,9 +110,6 @@ body {
     padding: 70px 0 40px 0;
     max-width: 600px;
     width: 100%;
-    background-color: #141414;
-    border-left: 1px solid #343434;
-    border-right: 1px solid #343434;
 }
 
 .posts-feed__title {

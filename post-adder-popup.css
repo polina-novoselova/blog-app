@@ -2,7 +2,6 @@
   position: fixed;
   top: 0;
   left: 0;
-  padding: 0 10px;
   width: 100%;
   height: 100%;
   display: flex;
@@ -14,13 +13,18 @@
   transition: all 0.5s ease;
 }
 
+@media (max-width: 600px) {
+  .add-post-popup {
+    padding: 0 15px;
+  }
+}
+
 .js-popup-open {
   visibility: visible;
   opacity: 1;
 }
 
 .add-post-popup-content {
-  position: relative;
   display: flex;
   flex-direction: column;
   width: 550px;
@@ -48,12 +52,12 @@
 }
 
 .post-title-wrap {
-    position: relative;
+  position: relative;
 }
 
-.post-title {
-    margin-top: 15px;
-    padding: 10px 20px;
+.post-title-input {
+  margin-top: 15px;
+  padding: 10px 20px;
   width: 100%;
   height: 40px;
   border-bottom: 1px solid #545454;
@@ -61,30 +65,29 @@
 }
 
 .post-title::placeholder {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .post-title-counter {
-    position: absolute;
-    right: 10px;
-    bottom: 6px;
-
+  position: absolute;
+  right: 10px;
+  bottom: 6px;
 }
 
 .post-title-current,
 .post-title-total,
 .post-dscrpt-current,
 .post-dscrpt-total {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .post-dscrpt-wrap {
-    position: relative;
+  position: relative;
 }
 
-.post-dscrpt {
-    margin-top: 15px;
-    padding: 0 20px;
+.post-dscrpt-input {
+  margin-top: 15px;
+  padding: 0 20px;
   width: 100%;
   height: 150px;
   border-bottom: 1px solid #545454;
@@ -93,13 +96,13 @@
 }
 
 .post-dscrpt::placeholder {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .post-dscrpt-counter {
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
 }
 
 .publish-post-btn {
@@ -115,6 +118,6 @@
 }
 
 .publish-post-btn:hover {
-    border: 1px solid #175da3;
-    background-color: #2770b9;
+  border: 1px solid #175da3;
+  background-color: #2770b9;
 }
