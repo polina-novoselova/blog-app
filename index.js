@@ -27,16 +27,21 @@ const postsListNode = document.getElementById("posts-list-wrap");
 //Переменные
 
 let posts = [];
-let postTitle = "";
-let postDscrpt = "";
+let postTitleFromUser = "";
+let postDscrptFromUser = "";
 
 //Открытие и закрытие попапа
 
 popupAddPostBtnOpenLgNode.addEventListener("click", toggleClassNamePopup);
 popupAddPostBtnOpenSmNode.addEventListener("click", toggleClassNamePopup);
 popupAddPostBtnCloseNode.addEventListener("click", toggleClassNamePopup);
+popupAddPostBtnCloseNode.addEventListener("click", clearInput);
 
 function toggleClassNamePopup() {
+  if (postTitleFromUser && postDscrptFromUser != "") {
+    clearInput();
+  };
+
   popupAddPostNode.classList.toggle(POPUP_ADD_POST_OPEN_CLASSNAME);
   bodyNode.classList.toggle(BODY_FIXED_CLASSNAME);
 }
@@ -69,12 +74,15 @@ function publishPost() {
 
   // очистить поля ввода
   clearInput();
+
+  //закрываем попап
+  toggleClassNamePopup();
 };
 
 function getPostFrormUser() {
-  const post = postTitle;
-  postTitle = postTitleInputNode.value;
-  postDscrpt = postDscrptInputNode.value;
+  const post = postTitleFromUser;
+  postTitleFromUser = postTitleInputNode.value;
+  postDscrptFromUser = postDscrptInputNode.value;
 
   return post;
 };
@@ -92,13 +100,13 @@ function renderPost() {
   let postsListHTML = "";
 
   posts.push({
-    postTitle: postTitle,
-    postDscrpt: postDscrpt,
+    postTitleFromUser: postTitleFromUser,
+    postDscrptFromUser: postDscrptFromUser,
   });
 
   posts.forEach((post) => {
-    const {postTitle, postDscrpt} = post;
-    postsListHTML += `<li class="post-item"><h3 class="post-title">${postTitle}</h3><p class="post-text"> ${postDscrpt}</p></li>`;
+    const {postTitleFromUser, postDscrptFromUser} = post;
+    postsListHTML += `<li class="post-item"><h3 class="post-title">${postTitleFromUser}</h3><p class="post-text"> ${postDscrptFromUser}</p></li>`;
   });
 
   postsListNode.innerHTML = `<ul class="posts-list">${postsListHTML}</ul>`;
