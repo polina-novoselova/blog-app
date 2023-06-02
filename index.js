@@ -66,6 +66,11 @@ function publishPost() {
   // получить данные из инпутов
   const postFromUser = getPostFrormUser();
 
+  //проверка на наличие значение в инпутах
+  if (getPostFrormUser() === "") {
+    return;
+  };
+
   // сохранить пост
   setPost(postFromUser);
 

@@ -1,4 +1,9 @@
 .add-post-popup {
+  padding: 0 calc(20px - (100vw - 100%)) 0 0;
+}
+
+
+.add-post-popup {
   position: fixed;
   top: 0;
   left: 0;
@@ -57,21 +62,19 @@
 
 .post-title-input {
   margin-top: 15px;
-  padding: 10px 20px;
+  padding: 20px 0 20px 20px;
   width: 100%;
-  height: 40px;
+  height: 60px;
+  max-height: 80px;
   border-bottom: 1px solid #545454;
-  font-size: 16px;
-}
-
-.post-title::placeholder {
-  font-size: 16px;
+  resize: none;
+  font-size: 18px;
 }
 
 .post-title-counter {
   position: absolute;
   right: 10px;
-  bottom: 6px;
+  bottom: 10px;
 }
 
 .post-title-current,

@@ -7,12 +7,14 @@ body {
     color: #ffffff;
 }
 
+body { padding: 0 calc(20px - (100vw - 100%)) 0 0; }
+
 .body_fixed {
     overflow: hidden;
 }
 
 main {
-    min-height: 100%;
+    min-height: 100vh;
 }
 
 main, 
