@@ -124,6 +124,14 @@ main,
     margin-top: 5px;
 }
 
+.init-text {
+    margin-top: 25px;
+    padding: 25px 20px;
+    font-size: 18px;
+    opacity: 0.5;
+    border-top: 1px solid #343434;
+}
+
 .post-item {
     margin-top: 25px;
     padding: 0 20px;
@@ -131,14 +139,20 @@ main,
 }
 
 .post-title {
-    margin-top: 15px;
+    margin-top: 25px;
+    width: 100%;
+    max-width: 600px;
     font-size: 18px;
+    word-wrap: break-word;
 }
 
 .post-text {
     margin-top: 15px;
+    width: 100%;
+    max-width: 600px;
     font-size: 16px;
     line-height: 20px;
+    word-wrap: break-word;
 }
 
 .post-date {

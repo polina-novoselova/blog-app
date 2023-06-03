@@ -7,22 +7,17 @@ const POPUP_ADD_POST_OPEN_CLASSNAME = "js-popup-open";
 
 const bodyNode = document.querySelector("body");
 
-const popupAddPostBtnOpenLgNode = document.getElementById(
-  "add-post-btn-open-lg"
-);
-const popupAddPostBtnOpenSmNode = document.getElementById(
-  "add-post-btn-open-sm"
-);
+const popupAddPostBtnOpenLgNode = document.getElementById("add-post-btn-open-lg");
+const popupAddPostBtnOpenSmNode = document.getElementById("add-post-btn-open-sm");
 const popupAddPostBtnCloseNode = document.getElementById("add-post-btn-close");
 const popupAddPostNode = document.getElementById("popup-add-post");
 const popupContentNode = document.getElementById("popup-add-post-content");
-
 const postTitleInputNode = document.getElementById("post-title-input");
 const postDscrptInputNode = document.getElementById("post-dscrpt-input");
-
 const publishBtnNode = document.getElementById("publish-btn");
-
 const postsListNode = document.getElementById("posts-list-wrap");
+const counterPostTitleNode = document.getElementById("post-title-current");
+const counterPostDscrptNode = document.getElementById("post-dscrpt-current");
 
 //Переменные
 
@@ -38,13 +33,9 @@ popupAddPostBtnCloseNode.addEventListener("click", toggleClassNamePopup);
 popupAddPostBtnCloseNode.addEventListener("click", clearInput);
 
 function toggleClassNamePopup() {
-  if (postTitleFromUser && postDscrptFromUser != "") {
-    clearInput();
-  };
-
   popupAddPostNode.classList.toggle(POPUP_ADD_POST_OPEN_CLASSNAME);
   bodyNode.classList.toggle(BODY_FIXED_CLASSNAME);
-}
+};
 
 //Закрытие попапа вне поля контента
 
@@ -54,6 +45,7 @@ popupAddPostNode.addEventListener("click", (event) => {
     .includes(popupContentNode);
 
   if (isClickOutsideContent) {
+    clearInput();
     toggleClassNamePopup();
   }
 });
@@ -67,8 +59,8 @@ function publishPost() {
   const postFromUser = getPostFrormUser();
 
   //проверка на наличие значение в инпутах
-  if (getPostFrormUser() === "") {
-    return;
+  if (postTitleFromUser === "" || postDscrptFromUser === "") {
+        return;
   };
 
   // сохранить пост
@@ -84,6 +76,24 @@ function publishPost() {
   toggleClassNamePopup();
 };
 
+//Делаем счетчики знаков в инпутах
+postTitleInputNode.addEventListener('input', onInputTitle);
+
+function onInputTitle(event) {
+  const length = event.target.value.length;
+
+  counterPostTitleNode.textContent = length;
+};
+
+postDscrptInputNode.addEventListener('input', onInputDscrpt);
+
+function onInputDscrpt(event) {
+  const length = event.target.value.length;
+
+  counterPostDscrptNode.textContent = length;
+};
+
+//Получаем значения из инпутов
 function getPostFrormUser() {
   const post = postTitleFromUser;
   postTitleFromUser = postTitleInputNode.value;

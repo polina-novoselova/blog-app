@@ -32,6 +32,7 @@
       <section class="posts-feed">
         <h2 class="posts-feed__title">NEWS FEED</h2>
         <div id="posts-list-wrap" class="posts-list-wrap">
+          <p class="init-text">Add first post...</p>
         </div>
       </section>
     </main>
@@ -39,19 +40,19 @@
       <div id="popup-add-post-content" class="add-post-popup-content">
         <button id="add-post-btn-close" class="close-btn-popup"></button>
         <div class="post-title-wrap"> 
-          <textarea id="post-title-input" class="post-title-input" rows="2" maxlength="80" placeholder="Add a title"></textarea>
+          <textarea id="post-title-input" class="post-title-input" rows="2" maxlength="40" placeholder="Add a title"></textarea>
             <div class="post-title-counter">
-                <span class="post-title-current">0</span>
+                <span id="post-title-current" class="post-title-current">0</span>
                 <span>/</span>
-                <span class="post-title-total">80</span>
+                <span class="post-title-total">40</span>
             </div>
         </div>
         <div class="post-dscrpt-wrap">
-            <textarea id="post-dscrpt-input" class="post-dscrpt-input" cols="25" rows="10" maxlength="300" placeholder="Your text"></textarea>
+            <textarea id="post-dscrpt-input" class="post-dscrpt-input" cols="25" rows="10" maxlength="280" placeholder="Your text"></textarea>
             <div class="post-dscrpt-counter">
-                <span class="post-dscrpt-current">0</span>
+                <span id="post-dscrpt-current" class="post-dscrpt-current">0</span>
                 <span>/</span>
-                <span class="post-dscrpt-total">360</span>
+                <span class="post-dscrpt-total">280</span>
             </div>
         </div>
         <button id="publish-btn" class="publish-post-btn">Publish</button>
