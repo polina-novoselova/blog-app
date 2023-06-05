@@ -93,6 +93,15 @@ function onInputDscrpt(event) {
   counterPostDscrptNode.textContent = length;
 };
 
+//Опубликовать по нажатию на ентер
+postDscrptInputNode.addEventListener('keydown', publishPostOnEnter);
+
+function publishPostOnEnter(event) {
+  if (event.code === 'Enter') {
+    publishBtnNode.click();
+  }
+};
+
 //Получаем значения из инпутов
 function getPostFrormUser() {
   const post = postTitleFromUser;
@@ -103,12 +112,14 @@ function getPostFrormUser() {
 };
 
 function setPost(newPost) {
-  post = newPost;
+  const post = newPost;
 };
 
 function clearInput() {
   postTitleInputNode.value = "";
   postDscrptInputNode.value = "";
+  counterPostTitleNode.textContent = "0";
+  counterPostDscrptNode.textContent = "0";
 };
 
 function renderPost() {
