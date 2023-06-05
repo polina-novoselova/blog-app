@@ -1,167 +1,173 @@
 @import url(./post-adder-popup.css);
 
 body {
-    margin: 0 auto;
-    background-color: #040404;
-    font-family: 'Montserrat', sans-serif;
-    color: #ffffff;
+  margin: 0 auto;
+  padding: 0 calc(20px - (100vw - 100%)) 0 0;
+  background-color: #040404;
+  font-family: "Montserrat", sans-serif;
+  color: #ffffff;
 }
 
-body { padding: 0 calc(20px - (100vw - 100%)) 0 0; }
+@media (max-width: 767px) {
+  body {
+    padding: 0 0;
+  }
+}
 
 .body_fixed {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 main {
-    min-height: 100vh;
+  min-height: 100vh;
 }
 
-main, 
+main,
 .header-inner {
-    margin: 0 auto;
-    max-width: 600px;
-    width: 100%;
-    background-color: #141414;
-    border-left: 1px solid #343434;
-    border-right: 1px solid #343434;
+  margin: 0 auto;
+  max-width: 600px;
+  width: 100%;
+  background-color: #141414;
+  border-left: 1px solid #343434;
+  border-right: 1px solid #343434;
 }
 
 .background-cover {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 120px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://balthazar.club/uploads/posts/2023-02/1675282642_balthazar-club-p-raznotsvetnie-tsveti-oboi-15.jpg);
-    background-position: center;
-    background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 120px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(https://balthazar.club/uploads/posts/2023-02/1675282642_balthazar-club-p-raznotsvetnie-tsveti-oboi-15.jpg);
+  background-position: center;
+  background-size: cover;
 }
 
 .blog-title {
-    margin-top: 30px;
-    font-size: 25px;
-    font-weight: 200;
-    line-height: 50px;
-    letter-spacing: 0.6em;
-    text-align: center;
+  margin-top: 30px;
+  font-size: 25px;
+  font-weight: 200;
+  line-height: 50px;
+  letter-spacing: 0.6em;
+  text-align: center;
 }
 
 .logo {
-    margin-top: -20px;
-    margin-left: 30px;
-    width: 120px;
-    height: 120px;
+  margin-top: -20px;
+  margin-left: 30px;
+  width: 120px;
+  height: 120px;
 }
 
 .add-post-btn,
 .for-large-screen {
-    align-self: flex-end;
-    margin: -45px 13px 0 0;
-    width: 150px;
-    border: 1px solid #14508d;
-    border-radius: 40px;
-    background-color: #175da3;
-    font-size: 14px;
-    line-height: 40px;
-    transition: all 0.5s;
+  align-self: flex-end;
+  margin: -45px 13px 0 0;
+  width: 150px;
+  border: 1px solid #14508d;
+  border-radius: 40px;
+  background-color: #175da3;
+  font-size: 14px;
+  line-height: 40px;
+  transition: all 0.5s;
 }
 
 .for-small-screen {
-    display: none;
+  display: none;
 }
 
 .add-post-btn:hover {
-    border: 1px solid #175da3;
-    background-color: #2770b9;
+  border: 1px solid #175da3;
+  background-color: #2770b9;
 }
 
 @media (max-width: 600px) {
-    .blog-title {
-        margin-top: 20px;
-        font-size: 18px;
-        line-height: 70px;
-        letter-spacing: 0.5em;
-    }
-    
-    .logo {
-        margin-top: -20px;
-        margin-left: 20px;
-        width: 100px;
-        height: 100px;
-    }
-    
-    .add-post-btn,
-    .for-small-screen {
-        display: table;
-        position: fixed;
-        bottom: 20px;
-        right: 5px;
-        width: 70px;
-        font-size: 60px;
-        font-weight: 200;
-        line-height: 70px;
-    }
+  .blog-title {
+    margin-top: 20px;
+    font-size: 18px;
+    line-height: 70px;
+    letter-spacing: 0.5em;
+  }
 
-    .for-large-screen {
-        display: none;
-    }
+  .logo {
+    margin-top: -20px;
+    margin-left: 20px;
+    width: 100px;
+    height: 100px;
+  }
+
+  .add-post-btn,
+  .for-small-screen {
+    display: table;
+    position: fixed;
+    bottom: 20px;
+    right: 5px;
+    width: 70px;
+    font-size: 60px;
+    font-weight: 200;
+    line-height: 70px;
+  }
+
+  .for-large-screen {
+    display: none;
+  }
 }
 
 .posts-feed {
-    margin:auto;
-    padding: 70px 0 40px 0;
-    max-width: 600px;
-    width: 100%;
+  margin: auto;
+  padding: 70px 0 40px 0;
+  max-width: 600px;
+  width: 100%;
 }
 
 .posts-feed__title {
- margin-top: 15px;
- padding: 0 20px;
- font-size: 20px;
+  margin-top: 15px;
+  padding: 0 20px;
+  font-size: 20px;
 }
 
 .posts-list {
-    margin-top: 5px;
+  margin-top: 5px;
 }
 
 .init-text {
-    margin-top: 25px;
-    padding: 25px 20px;
-    font-size: 18px;
-    opacity: 0.5;
-    border-top: 1px solid #343434;
+  margin-top: 25px;
+  padding: 25px 20px;
+  font-size: 18px;
+  opacity: 0.5;
+  border-top: 1px solid #343434;
 }
 
 .post-item {
-    margin-top: 25px;
-    padding: 0 20px;
-    border-top: 1px solid #343434;
+  margin-top: 25px;
+  padding: 0 20px;
+  border-top: 1px solid #343434;
 }
 
 .post-title {
-    margin-top: 25px;
-    width: 100%;
-    max-width: 600px;
-    font-size: 18px;
-    word-wrap: break-word;
+  margin-top: 25px;
+  width: 100%;
+  max-width: 600px;
+  font-size: 18px;
+  word-wrap: break-word;
 }
 
 .post-text {
-    margin-top: 15px;
-    width: 100%;
-    max-width: 600px;
-    font-size: 16px;
-    line-height: 20px;
-    word-wrap: break-word;
+  margin-top: 15px;
+  width: 100%;
+  max-width: 600px;
+  font-size: 16px;
+  line-height: 20px;
+  word-wrap: break-word;
 }
 
 .post-date {
-    margin-top: 15px;
-    font-size: 10px;
+  margin-top: 15px;
+  font-size: 10px;
 }
 
 @media (max-width: 600px) {
-    .posts-feed__title {
-        font-size: 18px;
-       }
+  .posts-feed__title {
+    font-size: 18px;
+  }
 }
