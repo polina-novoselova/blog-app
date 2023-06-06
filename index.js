@@ -2,6 +2,7 @@
 
 const BODY_FIXED_CLASSNAME = "body_fixed";
 const POPUP_ADD_POST_OPEN_CLASSNAME = "js-popup-open";
+const TEXT_COLOR_RED_CLASSNAME = "color-red";
 
 //Константы для элементов из html
 
@@ -81,33 +82,65 @@ function publishPost() {
 };
 
 //Делаем счетчики знаков в инпутах
-postTitleInputNode.addEventListener("input", onInputTitle);
+postTitleInputNode.addEventListener("input", updateCharCountTitle);
 
-function onInputTitle(event) {
-  const length = event.target.value.length;
+function updateCharCountTitle() {
+  const maxCharCount = 40;
+  const currentText = postTitleInputNode.value;
+  const remainingChars = maxCharCount - currentText.length;
 
-  counterPostTitleNode.textContent = length;
+  counterPostTitleNode.textContent = remainingChars;
+
+  if (remainingChars < 0) {
+    counterPostTitleNode.classList.add(TEXT_COLOR_RED_CLASSNAME);
+  } else if (remainingChars >= 0) {
+    counterPostTitleNode.classList.remove(TEXT_COLOR_RED_CLASSNAME);
+  }
+
+  updatePublishBtnState();
 };
 
-postDscrptInputNode.addEventListener("input", onInputDscrpt);
+postDscrptInputNode.addEventListener("input", updateCharCountDscrpt);
 
-function onInputDscrpt(event) {
-  const length = event.target.value.length;
+function updateCharCountDscrpt() {
+  const maxCharCount = 280;
+  const currentText = postDscrptInputNode.value;
+  const remainingChars = maxCharCount - currentText.length;
 
-  counterPostDscrptNode.textContent = length;
+  counterPostDscrptNode.textContent = remainingChars;
+
+  if (remainingChars < 0) {
+    counterPostDscrptNode.classList.add(TEXT_COLOR_RED_CLASSNAME);
+  } else if (remainingChars >= 0) {
+    counterPostDscrptNode.classList.remove(TEXT_COLOR_RED_CLASSNAME);
+  }
+
+  updatePublishBtnState();
+};
+
+
+function updatePublishBtnState() {
+  const postTitleLength = postTitleInputNode.value.length;
+  const postDscrptLength = postDscrptInputNode.value.length;
+  
+  if (postTitleLength > 40 || postDscrptLength > 280) {
+    publishBtnNode.disabled = true;
+  } else {
+    publishBtnNode.disabled = false;
+  }
 };
 
 //Перенос строки при нажатии контрл+ентер и публикация при нажатии ентер
 
-// Добавляем обработчик события "keydown" на поле ввода описания поста
+// Добавляем обработчик события keydown на поле ввода описания поста
 postDscrptInputNode.addEventListener("keydown", handlerKeyDown);
 
-// Обработчик события "keydown"
+// Обработчик события keydown
 function handlerKeyDown(event) {
   // Проверяем, была ли нажата клавиша Enter и клавиша Ctrl
   if (event.key === "Enter" && event.ctrlKey) {
     event.preventDefault();
-    insertLineBreak(); // Вставляем символ новой строки
+    insertLineBreakDscrpt(); // Вставляем символ новой строки
   } else if (event.key === "Enter" && !event.ctrlKey) {
     event.preventDefault();
     publishPost(); // Публикуем пост
@@ -117,42 +150,51 @@ function handlerKeyDown(event) {
 postTitleInputNode.addEventListener("keydown", keyDownEnter);
 
 function keyDownEnter(event) {
-  if (event.key === "Enter" && !event.ctrlKey) {
+  if (event.key === "Enter" && event.ctrlKey) {
+    event.preventDefault();
+    insertLineBreakTitle();
+  } else if (event.key === "Enter" && !event.ctrlKey) {
     event.preventDefault();
     publishPost();
-  }  
+  }
 };
 
-// Функция для вставки символа новой строки
-function insertLineBreak() {
+// Функция для вставки символа новой строки в поле основного текста поста
+function insertLineBreakDscrpt() {
   const { selectionStart, selectionEnd, value } = postDscrptInputNode;
-  // Разбиваем объект `postDscrptInputNode` на отдельные переменные:
-  // `selectionStart` - позиция начала выделенного текста
-  // `selectionEnd` - позиция конца выделенного текста
-  // `value` - значение текста в поле ввода
+  // Разбиваем объект postDscrptInputNode на отдельные переменные
+  // selectionStart - позиция начала выделенного текста
+  // selectionEnd - позиция конца выделенного текста
+  // value - значение текста в поле ввода
 
-  const lineBreak = "\n"; // Создаем переменную `lineBreak`, которая содержит символ новой строки
+  const lineBreak = "\n"; // Создаем переменную lineBreak, которая содержит символ новой строки
 
-  // Создаем новую строку `newValue`, объединяя три части:
-  // 1. Строка до начала выделенного текста
-  // 2. Символ новой строки
-  // 3. Строка после выделенного текста
+  // Создаем новую строку newValue, объединяя три части
+  // 1 Строка до начала выделенного текста
+  // 2 Символ новой строки
+  // 3 Строка после выделенного текста
   const newValue = value.slice(0, selectionStart) + lineBreak + value.slice(selectionEnd);
 
   postDscrptInputNode.value = newValue; // Устанавливаем новое значение текста в поле ввода
 
-  // Устанавливаем позицию курсора на одну позицию после символа новой строки,
+  // Устанавливаем позицию курсора на одну позицию после символа новой строки, 
   // чтобы курсор перешел на новую строку
   postDscrptInputNode.setSelectionRange(selectionStart + 1, selectionStart + 1);
 };  
 
+function insertLineBreakTitle() {
+  const { selectionStart, selectionEnd, value } = postTitleInputNode;
+  const lineBreak = "\n";
+  const newValue = value.slice(0, selectionStart) + lineBreak + value.slice(selectionEnd);
+
+  postTitleInputNode.value = newValue;
+  postTitleInputNode.setSelectionRange(selectionStart + 1, selectionStart + 1);
+};  
+
 //Получаем значения из инпутов
 function getPostFrormUser() {
-  const post = postTitleFromUser;
   postTitleFromUser = postTitleInputNode.value;
   postDscrptFromUser = postDscrptInputNode.value;
-
-  return post;
 };
 
 function setPost(newPost) {
@@ -162,8 +204,8 @@ function setPost(newPost) {
 function clearInput() {
   postTitleInputNode.value = "";
   postDscrptInputNode.value = "";
-  counterPostTitleNode.textContent = "0";
-  counterPostDscrptNode.textContent = "0";
+  counterPostTitleNode.textContent = "40";
+  counterPostDscrptNode.textContent = "280";
 };
 
 function renderPost() {
@@ -181,11 +223,16 @@ function renderPost() {
 
     // Заменяем символы новой строки на <br> в описании поста
     const formattedPostDscrpt = postDscrptFromUser.replace(/\n/g, "<br>");
+    const formattedPostTitle = postTitleFromUser.replace(/\n/g, "<br>");
 
     // Формируем HTML-код для каждого поста и добавляем его в переменную postsListHTML
-    postsListHTML += `<li class="post-item"><h3 class="post-title">${postTitleFromUser}</h3><p class="post-text">${formattedPostDscrpt}</p></li>`;
+    postsListHTML += `<li class="post-item"><h3 class="post-title">${formattedPostTitle}</h3><p class="post-text">${formattedPostDscrpt}</p></li>`;
   });
 
   // Вставляем сформированный HTML-код в элемент с идентификатором postsListNode
   postsListNode.innerHTML = `<ul class="posts-list">${postsListHTML}</ul>`;
 };
+
+// function warning() {
+
+// }
