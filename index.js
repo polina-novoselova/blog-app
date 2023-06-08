@@ -34,6 +34,7 @@ let postDscrptFromUser = "";
 
 popupAddPostBtnOpenLgNode.addEventListener("click", toggleClassNamePopup);
 popupAddPostBtnOpenLgNode.addEventListener("click", focusInput);
+popupAddPostBtnOpenSmNode.addEventListener("click", focusInput);
 popupAddPostBtnOpenSmNode.addEventListener("click", toggleClassNamePopup);
 popupAddPostBtnCloseNode.addEventListener("click", toggleClassNamePopup);
 popupAddPostBtnCloseNode.addEventListener("click", clearInput);
@@ -44,13 +45,14 @@ function toggleClassNamePopup() {
 }
 
 function focusInput() {
-  let timeId = setTimeout(focusInput, 500, 1);
-  const textarea = postTitleInputNode;
-  textarea.focus();
+  const inputField = postTitleInputNode;
+  inputField.focus();
 
-  if (postTitleInputNode.value != '') {
-    clearTimeout(timeId);
+  if (inputField.value !== '') {
+    return;
   }
+
+  setTimeout(focusInput, 500);
 }
 
 //Закрытие попапа вне поля контента
