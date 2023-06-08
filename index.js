@@ -33,6 +33,7 @@ let postDscrptFromUser = "";
 //Открытие и закрытие попапа
 
 popupAddPostBtnOpenLgNode.addEventListener("click", toggleClassNamePopup);
+popupAddPostBtnOpenLgNode.addEventListener("click", focusInput);
 popupAddPostBtnOpenSmNode.addEventListener("click", toggleClassNamePopup);
 popupAddPostBtnCloseNode.addEventListener("click", toggleClassNamePopup);
 popupAddPostBtnCloseNode.addEventListener("click", clearInput);
@@ -40,6 +41,16 @@ popupAddPostBtnCloseNode.addEventListener("click", clearInput);
 function toggleClassNamePopup() {
   popupAddPostNode.classList.toggle(POPUP_ADD_POST_OPEN_CLASSNAME);
   bodyNode.classList.toggle(BODY_FIXED_CLASSNAME);
+}
+
+function focusInput() {
+  let timeId = setTimeout(focusInput, 500, 1);
+  const textarea = postTitleInputNode;
+  textarea.focus();
+
+  if (postTitleInputNode.value != '') {
+    clearTimeout(timeId);
+  }
 }
 
 //Закрытие попапа вне поля контента
@@ -62,11 +73,19 @@ publishBtnNode.addEventListener("click", publishPost);
 function publishPost() {
   // получить данные из инпутов
   const postFromUser = getPostFrormUser();
+  const postTitleLength = postTitleInputNode.value.length;
+  const postDscrptLength = postDscrptInputNode.value.length;
 
-  //проверка на наличие значение в инпутах
-  if (postTitleFromUser === "" || postDscrptFromUser === "") {
+  // проверка на наличие значение в инпутах
+  if (!postTitleFromUser || !postDscrptFromUser) {
     return;
   }
+
+  if (postTitleLength > 40 || postDscrptLength > 280) {
+    return;
+  }
+
+  // validate(postTitleLength, postDscrptLength, postTitleValue, postDscrptValue);
 
   // сохранить пост
   setPost(postFromUser);
@@ -79,7 +98,12 @@ function publishPost() {
 
   //закрываем попап
   toggleClassNamePopup();
-};
+}
+
+const postTitleLength = postTitleInputNode.value.length;
+const postDscrptLength = postDscrptInputNode.value.length;
+const postTitleValue = postTitleInputNode.value;
+const postDscrptValue = postDscrptInputNode.value;
 
 //Делаем счетчики знаков в инпутах
 postTitleInputNode.addEventListener("input", updateCharCountTitle);
@@ -96,9 +120,7 @@ function updateCharCountTitle() {
   } else if (remainingChars >= 0) {
     counterPostTitleNode.classList.remove(TEXT_COLOR_RED_CLASSNAME);
   }
-
-  updatePublishBtnState();
-};
+}
 
 postDscrptInputNode.addEventListener("input", updateCharCountDscrpt);
 
@@ -114,21 +136,18 @@ function updateCharCountDscrpt() {
   } else if (remainingChars >= 0) {
     counterPostDscrptNode.classList.remove(TEXT_COLOR_RED_CLASSNAME);
   }
+}
 
-  updatePublishBtnState();
-};
+// function updatePublishBtnState() {
+//   const postTitleLength = postTitleInputNode.value.length;
+//   const postDscrptLength = postDscrptInputNode.value.length;
 
-
-function updatePublishBtnState() {
-  const postTitleLength = postTitleInputNode.value.length;
-  const postDscrptLength = postDscrptInputNode.value.length;
-  
-  if (postTitleLength > 40 || postDscrptLength > 280) {
-    publishBtnNode.disabled = true;
-  } else {
-    publishBtnNode.disabled = false;
-  }
-};
+//   if (postTitleLength > 40 || postDscrptLength > 280) {
+//     publishBtnNode.disabled = true;
+//   } else {
+//     publishBtnNode.disabled = false;
+//   }
+// };
 
 //Перенос строки при нажатии контрл+ентер и публикация при нажатии ентер
 
@@ -141,11 +160,11 @@ function handlerKeyDown(event) {
   if (event.key === "Enter" && event.ctrlKey) {
     event.preventDefault();
     insertLineBreakDscrpt(); // Вставляем символ новой строки
-  } else if (event.key === "Enter" && !event.ctrlKey) {
+  } else if (event.key === "Enter") {
     event.preventDefault();
     publishPost(); // Публикуем пост
   }
-};
+}
 
 postTitleInputNode.addEventListener("keydown", keyDownEnter);
 
@@ -153,11 +172,11 @@ function keyDownEnter(event) {
   if (event.key === "Enter" && event.ctrlKey) {
     event.preventDefault();
     insertLineBreakTitle();
-  } else if (event.key === "Enter" && !event.ctrlKey) {
+  } else if (event.key === "Enter") {
     event.preventDefault();
     publishPost();
   }
-};
+}
 
 // Функция для вставки символа новой строки в поле основного текста поста
 function insertLineBreakDscrpt() {
@@ -173,40 +192,42 @@ function insertLineBreakDscrpt() {
   // 1 Строка до начала выделенного текста
   // 2 Символ новой строки
   // 3 Строка после выделенного текста
-  const newValue = value.slice(0, selectionStart) + lineBreak + value.slice(selectionEnd);
+  const newValue =
+    value.slice(0, selectionStart) + lineBreak + value.slice(selectionEnd);
 
   postDscrptInputNode.value = newValue; // Устанавливаем новое значение текста в поле ввода
 
-  // Устанавливаем позицию курсора на одну позицию после символа новой строки, 
+  // Устанавливаем позицию курсора на одну позицию после символа новой строки,
   // чтобы курсор перешел на новую строку
   postDscrptInputNode.setSelectionRange(selectionStart + 1, selectionStart + 1);
-};  
+}
 
 function insertLineBreakTitle() {
   const { selectionStart, selectionEnd, value } = postTitleInputNode;
   const lineBreak = "\n";
-  const newValue = value.slice(0, selectionStart) + lineBreak + value.slice(selectionEnd);
+  const newValue =
+    value.slice(0, selectionStart) + lineBreak + value.slice(selectionEnd);
 
   postTitleInputNode.value = newValue;
   postTitleInputNode.setSelectionRange(selectionStart + 1, selectionStart + 1);
-};  
+}
 
 //Получаем значения из инпутов
 function getPostFrormUser() {
   postTitleFromUser = postTitleInputNode.value;
   postDscrptFromUser = postDscrptInputNode.value;
-};
+}
 
 function setPost(newPost) {
   const post = newPost;
-};
+}
 
 function clearInput() {
   postTitleInputNode.value = "";
   postDscrptInputNode.value = "";
   counterPostTitleNode.textContent = "40";
   counterPostDscrptNode.textContent = "280";
-};
+}
 
 function renderPost() {
   let postsListHTML = "";
@@ -231,7 +252,7 @@ function renderPost() {
 
   // Вставляем сформированный HTML-код в элемент с идентификатором postsListNode
   postsListNode.innerHTML = `<ul class="posts-list">${postsListHTML}</ul>`;
-};
+}
 
 // function warning() {
 
