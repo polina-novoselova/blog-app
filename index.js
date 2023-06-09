@@ -44,17 +44,6 @@ function toggleClassNamePopup() {
   bodyNode.classList.toggle(BODY_FIXED_CLASSNAME);
 }
 
-function focusInput() {
-  const inputField = postTitleInputNode;
-  inputField.focus();
-
-  if (inputField.value !== '') {
-    return;
-  }
-
-  setTimeout(focusInput, 500);
-}
-
 //Закрытие попапа вне поля контента
 
 popupAddPostNode.addEventListener("click", (event) => {
@@ -102,6 +91,17 @@ function publishPost() {
   toggleClassNamePopup();
 }
 
+function focusInput() {
+  const inputField = postTitleInputNode;
+  inputField.focus();
+
+  if (inputField.value !== '') {
+    return;
+  }
+
+  setTimeout(focusInput, 500);
+}
+
 const postTitleLength = postTitleInputNode.value.length;
 const postDscrptLength = postDscrptInputNode.value.length;
 const postTitleValue = postTitleInputNode.value;
@@ -140,17 +140,6 @@ function updateCharCountDscrpt() {
   }
 }
 
-// function updatePublishBtnState() {
-//   const postTitleLength = postTitleInputNode.value.length;
-//   const postDscrptLength = postDscrptInputNode.value.length;
-
-//   if (postTitleLength > 40 || postDscrptLength > 280) {
-//     publishBtnNode.disabled = true;
-//   } else {
-//     publishBtnNode.disabled = false;
-//   }
-// };
-
 //Перенос строки при нажатии контрл+ентер и публикация при нажатии ентер
 
 // Добавляем обработчик события keydown на поле ввода описания поста
@@ -167,6 +156,39 @@ function handlerKeyDown(event) {
     publishPost(); // Публикуем пост
   }
 }
+
+// function qwerty() {
+//   if (window.innerWidth < 601) {
+//     keyDownEnter.preventDefault();
+//     insertLineBreakDscrpt();
+//   }
+//   return;
+// }
+
+// function qwerty(event) {
+//   if (window.innerWidth < 601) {
+//     event.stopPropagation()
+//   }
+//   return;
+// }
+
+//Пытаюсь отминить действие кнопки ентер (публикация по клику),
+//при ширине экрана телефона от 600px и меньше
+
+myFunction(); // Вызов функции прослушивателя во время выполнения
+media.addEventListener('keyup', myFunction); // Прикрепить функцию прослушивателя при изменении состояния
+
+let media = window.matchMedia("(max-width: 600px)");
+
+function myFunction(media, event) {
+  if (media.matches && event.key === "Enter") { // Если медиа запрос совпадает
+    event.preventDefault();
+    insertLineBreakDscrpt();
+  }
+  return;
+}
+
+// console.log(myFunction(media));
 
 postTitleInputNode.addEventListener("keydown", keyDownEnter);
 
