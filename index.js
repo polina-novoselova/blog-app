@@ -20,10 +20,12 @@ const postTitleLength = postTitleInputNode.value.length;
 const postDscrptLength = postDscrptInputNode.value.length;
 const postTitleValue = postTitleInputNode.value;
 const postDscrptValue = postDscrptInputNode.value;
+const currentDate = getDate();
 
 let posts = [];
 let postTitleFromUser = "";
 let postDscrptFromUser = "";
+
 
 popupAddPostBtnOpenLgNode.addEventListener("click", toggleClassNamePopup);
 popupAddPostBtnOpenLgNode.addEventListener("click", focusInput);
@@ -184,6 +186,19 @@ function clearInput() {
   postDscrptInputNode.value = "";
   counterPostTitleNode.textContent = "40";
   counterPostDscrptNode.textContent = "280";
+};
+
+function getDate() {
+  const currentDate = new Date();
+  const day = currentDate.getDate();
+  const month = new Intl.DateTimeFormat('default', { month: 'long' }).format(currentDate);
+  const year = currentDate.getFullYear();
+  const hours = currentDate.getHours().toString().padStart(2, '0');
+  const minutes = currentDate.getMinutes().toString().padStart(2, '0');
+  const time = `${hours}:${minutes}`;
+  const formattedDate = `${day} ${month} ${year} | ${time}`;
+
+  return formattedDate;
 }
 
 function renderPost() {
@@ -192,15 +207,20 @@ function renderPost() {
   posts.push({
     postTitleFromUser: postTitleFromUser,
     postDscrptFromUser: postDscrptFromUser,
+    currentDate: currentDate,
   });
 
   posts.forEach((post) => {
-    const { postTitleFromUser, postDscrptFromUser } = post;
+    const { postTitleFromUser, postDscrptFromUser, currentDate, } = post;
     const formattedPostDscrpt = postDscrptFromUser.replace(/\n/g, "<br>");
     const formattedPostTitle = postTitleFromUser.replace(/\n/g, "<br>");
 
-    postsListHTML += `<li class="post-item"><h3 class="post-title">${formattedPostTitle}</h3><p class="post-text">${formattedPostDscrpt}</p></li>`;
+    postsListHTML += `<li class="post-item"><h3 class="post-title">${formattedPostTitle}</h3><p class="post-text">${formattedPostDscrpt}</p><p class="current-date">${currentDate}</p></li>`;
   });
 
   postsListNode.innerHTML = `<ul class="posts-list">${postsListHTML}</ul>`;
-}
+};
+
+
+
+

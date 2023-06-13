@@ -164,9 +164,13 @@ main,
   word-wrap: break-word;
 }
 
-.post-date {
+.current-date {
   margin-top: 15px;
   font-size: 10px;
+  font-size: 12px;
+  line-height: 16px;
+  color: #4a9def;
+  word-wrap: break-word;
 }
 
 @media (max-width: 600px) {
