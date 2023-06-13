@@ -87,7 +87,7 @@ function validate(
     return false;
   }
 
-  if (!postTitleFromUser.trim() || !postDscrptFromUser.trim()) {
+  if (postTitleFromUser.trim() || postDscrptFromUser.trim()) {
     return false;
   }
 
