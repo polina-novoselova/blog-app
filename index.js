@@ -3,6 +3,7 @@ const POPUP_ADD_POST_OPEN_CLASSNAME = "js-popup-open";
 const TEXT_COLOR_RED_CLASSNAME = "color-red";
 const MAX_TITLE_LENGTH = 40;
 const MAX_DESCRIPTION_LENGTH = 280;
+const STORAGE_LABEL_POSTS = "posts";
 
 const bodyNode = document.querySelector("body");
 
@@ -26,7 +27,6 @@ let posts = [];
 let postTitleFromUser = "";
 let postDscrptFromUser = "";
 
-
 popupAddPostBtnOpenLgNode.addEventListener("click", toggleClassNamePopup);
 popupAddPostBtnOpenLgNode.addEventListener("click", focusInput);
 popupAddPostBtnOpenSmNode.addEventListener("click", focusInput);
@@ -39,14 +39,27 @@ postDscrptInputNode.addEventListener("input", updateCharCountDscrpt);
 postDscrptInputNode.addEventListener("keydown", handlerKeyDown);
 postTitleInputNode.addEventListener("keydown", handlerKeyDown);
 
+getPostsFromStorage();
+
+function getPostsFromStorage() {
+  const postsFromStorageString = localStorage.getItem(STORAGE_LABEL_POSTS);
+  if (!postsFromStorageString) {
+    return;
+  }
+
+  const postsFromStorage = JSON.parse(postsFromStorageString);
+  if (Array.isArray(postsFromStorage)) {
+    posts = postsFromStorage;
+  };
+  renderPost();
+};
+
 function toggleClassNamePopup() {
   popupAddPostNode.classList.toggle(POPUP_ADD_POST_OPEN_CLASSNAME);
   bodyNode.classList.toggle(BODY_FIXED_CLASSNAME);
   counterPostTitleNode.classList.remove(TEXT_COLOR_RED_CLASSNAME);
   counterPostDscrptNode.classList.remove(TEXT_COLOR_RED_CLASSNAME);
-}
-
-
+};
 
 popupAddPostNode.addEventListener("click", (event) => {
   const isClickOutsideContent = !event
@@ -84,7 +97,6 @@ function validate(
   }
 
   if (postTitleFromUser.length > MAX_TITLE_LENGTH || postDscrptFromUser.length > MAX_DESCRIPTION_LENGTH) {
-    console.log(11111);
     return false;
   }
 
@@ -171,16 +183,23 @@ function insertLineBreakTitle(input) {
 
   postDscrptInputNode.value = newValue;
   postDscrptInputNode.setSelectionRange(selectionStart + 1, selectionStart + 1);
-}
+};
 
 function getPostFrormUser() {
   postTitleFromUser = postTitleInputNode.value;
   postDscrptFromUser = postDscrptInputNode.value;
-}
+};
 
 function setPost(newPost) {
   const post = newPost;
-}
+  posts.push({
+    postTitleFromUser: postTitleFromUser,
+    postDscrptFromUser: postDscrptFromUser,
+    currentDate: currentDate,
+  });
+
+  savePostsToStorage();
+};
 
 function clearInput() {
   postTitleInputNode.value = "";
@@ -200,16 +219,15 @@ function getDate() {
   const formattedDate = `${day} ${month} ${year} | ${time}`;
 
   return formattedDate;
-}
+};
+
+function savePostsToStorage() {
+  const postsString = JSON.stringify(posts);
+  localStorage.setItem(STORAGE_LABEL_POSTS, postsString);
+};
 
 function renderPost() {
   let postsListHTML = "";
-
-  posts.push({
-    postTitleFromUser: postTitleFromUser,
-    postDscrptFromUser: postDscrptFromUser,
-    currentDate: currentDate,
-  });
 
   posts.forEach((post) => {
     const { postTitleFromUser, postDscrptFromUser, currentDate, } = post;
@@ -221,7 +239,4 @@ function renderPost() {
 
   postsListNode.innerHTML = `<ul class="posts-list">${postsListHTML}</ul>`;
 };
-
-
-
 
