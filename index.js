@@ -21,7 +21,7 @@ const counterPostDscrptNode = document.getElementById("post-dscrpt-current");
 
 const postTitleValue = postTitleInputNode.value;
 const postDscrptValue = postDscrptInputNode.value;
-const currentDate = getDate();
+// const currentDate = getDate();
 
 let posts = [];
 let postTitleFromUser = "";
@@ -82,7 +82,8 @@ function publishPost() {
     return;
   }
   
-  setPost(postFromUser);
+  const currentDate = getDate();
+  setPost(postFromUser, currentDate);
   renderPost();
   clearInput();
   toggleClassNamePopup();
@@ -190,7 +191,7 @@ function getPostFrormUser() {
   postDscrptFromUser = postDscrptInputNode.value;
 };
 
-function setPost(newPost) {
+function setPost(newPost, currentDate) {
   const post = newPost;
   posts.push({
     postTitleFromUser: postTitleFromUser,
