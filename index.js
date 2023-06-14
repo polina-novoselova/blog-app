@@ -1,6 +1,8 @@
 const BODY_FIXED_CLASSNAME = "body_fixed";
 const POPUP_ADD_POST_OPEN_CLASSNAME = "js-popup-open";
 const TEXT_COLOR_RED_CLASSNAME = "color-red";
+const MAX_TITLE_LENGTH = 40;
+const MAX_DESCRIPTION_LENGTH = 280;
 
 const bodyNode = document.querySelector("body");
 
@@ -16,8 +18,6 @@ const postsListNode = document.getElementById("posts-list-wrap");
 const counterPostTitleNode = document.getElementById("post-title-current");
 const counterPostDscrptNode = document.getElementById("post-dscrpt-current");
 
-const postTitleLength = postTitleInputNode.value.length;
-const postDscrptLength = postDscrptInputNode.value.length;
 const postTitleValue = postTitleInputNode.value;
 const postDscrptValue = postDscrptInputNode.value;
 const currentDate = getDate();
@@ -42,7 +42,11 @@ postTitleInputNode.addEventListener("keydown", handlerKeyDown);
 function toggleClassNamePopup() {
   popupAddPostNode.classList.toggle(POPUP_ADD_POST_OPEN_CLASSNAME);
   bodyNode.classList.toggle(BODY_FIXED_CLASSNAME);
+  counterPostTitleNode.classList.remove(TEXT_COLOR_RED_CLASSNAME);
+  counterPostDscrptNode.classList.remove(TEXT_COLOR_RED_CLASSNAME);
 }
+
+
 
 popupAddPostNode.addEventListener("click", (event) => {
   const isClickOutsideContent = !event
@@ -58,24 +62,20 @@ popupAddPostNode.addEventListener("click", (event) => {
 function publishPost() {
   const postFromUser = getPostFrormUser();
   const isValid = validate(
-    postTitleLength,
-    postDscrptLength,
     postTitleFromUser,
     postDscrptFromUser
   );
   if (!isValid) {
     return;
   }
-
+  
   setPost(postFromUser);
   renderPost();
   clearInput();
   toggleClassNamePopup();
-}
+};
 
 function validate(
-  postTitleLength,
-  postDscrptLength,
   postTitleFromUser,
   postDscrptFromUser
 ) {
@@ -83,11 +83,12 @@ function validate(
     return false;
   }
 
-  if (postTitleLength > 40 || postDscrptLength > 280) {
+  if (postTitleFromUser.length > MAX_TITLE_LENGTH || postDscrptFromUser.length > MAX_DESCRIPTION_LENGTH) {
+    console.log(11111);
     return false;
   }
 
-  if (postTitleFromUser.trim() || postDscrptFromUser.trim()) {
+  if (!postTitleFromUser.trim() || !postDscrptFromUser.trim()) {
     return false;
   }
 
@@ -117,7 +118,7 @@ function updateCharCountTitle() {
   } else if (remainingChars >= 0) {
     counterPostTitleNode.classList.remove(TEXT_COLOR_RED_CLASSNAME);
   }
-}
+};  
 
 function updateCharCountDscrpt() {
   const maxCharCount = 280;
