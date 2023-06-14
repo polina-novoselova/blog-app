@@ -46,6 +46,7 @@
   background-image: url(./add-post-close-btn.png);
   background-position: center;
   background-size: cover;
+  cursor: pointer;
   filter: invert(1);
 }
 
@@ -156,6 +157,7 @@
   background-color: #175da3;
   font-size: 14px;
   line-height: 40px;
+  cursor: pointer;
   transition: all 0.5s;
 }
 

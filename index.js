@@ -209,14 +209,8 @@ function clearInput() {
 };
 
 function getDate() {
-  const currentDate = new Date();
-  const day = currentDate.getDate();
-  const month = new Intl.DateTimeFormat('default', { month: 'long' }).format(currentDate);
-  const year = currentDate.getFullYear();
-  const hours = currentDate.getHours().toString().padStart(2, '0');
-  const minutes = currentDate.getMinutes().toString().padStart(2, '0');
-  const time = `${hours}:${minutes}`;
-  const formattedDate = `${day} ${month} ${year} | ${time}`;
+  const currentDate = moment().locale('ru');
+  const formattedDate = currentDate.format('D MMMM YYYY | HH:mm');
 
   return formattedDate;
 };

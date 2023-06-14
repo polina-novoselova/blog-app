@@ -69,6 +69,7 @@ main,
   background-color: #175da3;
   font-size: 14px;
   line-height: 40px;
+  cursor: pointer;
   transition: all 0.5s;
 }
 

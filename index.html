@@ -11,30 +11,32 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap"
       rel="stylesheet"
     />
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <link rel="stylesheet" href="./reset.css" />
     <link rel="stylesheet" href="./index.css" />
 
-    <link
-    rel="shortcut icon"
-    type="image/x-icon"
-    href="./favicon.png"
-  />
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.png" />
 
     <title>Polinitter</title>
   </head>
   <body id="body">
-    <!-- <textarea style="background-color: gray;" name="" id="" cols="30" rows="10" autofocus></textarea> -->
-
-
-
     <header>
       <div class="header-inner">
         <div class="background-cover">
           <h1 class="blog-title">POLINITTER</h1>
           <img src="./logo.png" alt="" class="logo" />
-          <button id="add-post-btn-open-lg" class="add-post-btn for-large-screen">Add new post</button>
-          <button id="add-post-btn-open-sm" class="add-post-btn for-small-screen">+</button>
+          <button
+            id="add-post-btn-open-lg"
+            class="add-post-btn for-large-screen"
+          >
+            Add new post
+          </button>
+          <button
+            id="add-post-btn-open-sm"
+            class="add-post-btn for-small-screen"
+          >
+            +
+          </button>
         </div>
       </div>
     </header>
@@ -49,18 +51,31 @@
     <div id="popup-add-post" class="add-post-popup">
       <div id="popup-add-post-content" class="add-post-popup-content">
         <button id="add-post-btn-close" class="close-btn-popup"></button>
-        <div class="post-title-wrap"> 
-          <textarea id="post-title-input" class="post-title-input" rows="2" placeholder="Add a title" ></textarea>
-            <div class="post-title-counter">
-                <span id="post-title-current" class="post-title-current">40</span>
-            </div>
-            <!-- сюда сделать подсказку введите заголовок -->
+        <div class="post-title-wrap">
+          <textarea
+            id="post-title-input"
+            class="post-title-input"
+            rows="2"
+            placeholder="Add a title"
+          ></textarea>
+          <div class="post-title-counter">
+            <span id="post-title-current" class="post-title-current">40</span>
+          </div>
+          <!-- сюда сделать подсказку введите заголовок -->
         </div>
         <div id="post-dscrpt-wrap" class="post-dscrpt-wrap">
-            <textarea id="post-dscrpt-input" class="post-dscrpt-input" cols="25" rows="10" placeholder="Your text"></textarea>
-            <div class="post-dscrpt-counter">
-                <span id="post-dscrpt-current" class="post-dscrpt-current">280</span>
-            </div>
+          <textarea
+            id="post-dscrpt-input"
+            class="post-dscrpt-input"
+            cols="25"
+            rows="10"
+            placeholder="Your text"
+          ></textarea>
+          <div class="post-dscrpt-counter">
+            <span id="post-dscrpt-current" class="post-dscrpt-current"
+              >280</span
+            >
+          </div>
         </div>
         <button id="publish-btn" class="publish-post-btn">Publish</button>
       </div>
